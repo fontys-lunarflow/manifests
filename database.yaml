@@ -1,4 +1,12 @@
 apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: postgres
+data:
+  PG_USER: admin
+  PG_PASS: admin
+---
+apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
   name: postgres-pvc
@@ -28,9 +36,15 @@ spec:
           image: postgres:15
           env:
             - name: POSTGRES_USER
-              value: admin
+              valueFrom:
+                configMapKeyRef:
+                  key: PG_USER
+                  name: postgres
             - name: POSTGRES_PASSWORD
-              value: admin
+              valueFrom:
+                configMapKeyRef:
+                  key: PG_PASS
+                  name: postgres
           ports:
             - containerPort: 5432
           volumeMounts:
@@ -85,7 +99,10 @@ spec:
             - name: PGADMIN_DEFAULT_EMAIL
               value: admin@localhost.local
             - name: PGADMIN_DEFAULT_PASSWORD
-              value: admin
+              valueFrom:
+                configMapKeyRef:
+                  key: PG_PASS
+                  name: postgres
             - name: PGADMIN_CONFIG_ALLOW_SPECIAL_EMAIL_DOMAINS
               value: "['local']"
           ports:
