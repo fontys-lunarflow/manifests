@@ -4,9 +4,9 @@ type: Opaque
 metadata:
   name: postgres-secret
 data:
-  PGADMIN_EMAIL: admin@localhost.local
-  POSTGRES_USER: admin
-  POSTGRES_PASSWORD: admin123
+  PGADMIN_EMAIL: YWRtaW5AbG9jYWxob3N0LmxvY2Fs
+  POSTGRES_PASSWORD: RW1tZW5lei5tb2k=
+  POSTGRES_USER: YWRtaW4=
 ---
 apiVersion: v1
 kind: PersistentVolumeClaim
@@ -44,7 +44,7 @@ spec:
                   name: postgres-secret
             - name: POSTGRES_PASSWORD
               valueFrom:
-                secretMapKeyRef:
+                secretKeyRef:
                   key: POSTGRES_PASSWORD
                   name: postgres-secret
           ports:
