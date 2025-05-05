@@ -1,0 +1,10 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: keycloak-config
+  namespace: keycloak
+data:
+  db-name: keycloak
+  db-url: jdbc:postgresql://postgres:5432/keycloak
+  admin-user: admin
+  admin-password: admin
