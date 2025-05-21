@@ -1,47 +1,48 @@
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
-  name: lunarflow-ing
+  name: cluster-services
+  annotations:
+    kubernetes.io/ingress.class: traefik
 spec:
-  ingressClassName: traefik
   rules:
-  - host: lunarflow.hkr.lan
+  - host: keycloak.luxdomain.work
     http:
       paths:
       - backend:
           service:
-            name: frontend
-            port:
-              number: 3000
-        path: /
-        pathType: Prefix
-  - host: lunarflow-ticketapi.hkr.lan
-    http:
-      paths:
-      - backend:
-          service:
-            name: ticket-api
+            name: keycloak
             port:
               number: 8080
         path: /
         pathType: Prefix
-  - host: lunarflow-contentapi.hkr.lan
+  - host: portainer.luxdomain.work
     http:
       paths:
       - backend:
           service:
-            name: content-service
+            name: portainer
             port:
-              number: 8080
+              number: 9000
         path: /
         pathType: Prefix
-  tls:
-  - hosts:
-    - lunarflow.hkr.lan
-    secretName: hkrlan-cert
-  - hosts:
-    - lunarflow-ticketapi.hkr.lan
-    secretName: hkrlan-cert
-  - hosts:
-    - lunarflow-contentapi.hkr.lan
-    secretName: hkrlan-cert
+  - host: longhorn.luxdomain.work
+    http:
+      paths:
+      - backend:
+          service:
+            name: longhorn-frontend
+            port:
+              number: 8000
+        path: /
+        pathType: Prefix
+  - host: pgadmin.luxdomain.work
+    http:
+      paths:
+      - backend:
+          service:
+            name: pgadmin
+            port:
+              number: 80
+        path: /
+        pathType: Prefix
