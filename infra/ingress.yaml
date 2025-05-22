@@ -1,0 +1,59 @@
+# Keycloak
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: keycloak-ingress
+  namespace: keycloak
+spec:
+  ingressClassName: traefik
+  rules:
+  - host: keycloak.luxdomain.work
+    http:
+      paths:
+      - backend:
+          service:
+            name: keycloak
+            port:
+              number: 8080
+        path: /
+        pathType: Prefix
+---
+# Longhorn
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: longhorn-ingress
+  namespace: longhorn-system
+spec:
+  ingressClassName: traefik
+  rules:
+  - host: longhorn.luxdomain.work
+    http:
+      paths:
+      - backend:
+          service:
+            name: longhorn-frontend
+            port:
+              number: 80
+        path: /
+        pathType: Prefix
+---
+# Portainer
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: portainer-ingress
+  namespace: portainer
+spec:
+  ingressClassName: traefik
+  rules:
+  - host: portainer.luxdomain.work
+    http:
+      paths:
+      - backend:
+          service:
+            name: portainer
+            port:
+              number: 9000
+        path: /
+        pathType: Prefix
