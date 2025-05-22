@@ -84,10 +84,8 @@ spec:
             - name: PGADMIN_DEFAULT_PASSWORD
               valueFrom:
                 secretKeyRef:
-                  key: POSTGRES_PASSWORD
+                  key: PGADMIN_PASSWORD
                   name: postgres-secret
-            - name: PGADMIN_CONFIG_ALLOW_SPECIAL_EMAIL_DOMAINS
-              value: "['local', 'localhost']"
           ports:
             - containerPort: 80
           volumeMounts:
