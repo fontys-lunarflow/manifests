@@ -17,7 +17,6 @@ spec:
               number: 15672
         path: /
         pathType: Prefix
-
 # PGAdmin Ingress
 apiVersion: networking.k8s.io/v1
 kind: Ingress
@@ -35,5 +34,24 @@ spec:
             name: pgadmin
             port:
               number: 80
+        path: /
+        pathType: Prefix
+# Traefik Dashboard Ingress
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: traefik-dashboard
+  namespace: kube-system
+spec:
+  ingressClassName: traefik
+  rules:
+  - host: traefik.luxdomain.lan
+    http:
+      paths:
+      - backend:
+          service:
+            name: traefik-service
+            port: 
+              number: 8080
         path: /
         pathType: Prefix
