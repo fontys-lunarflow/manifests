@@ -64,7 +64,7 @@ spec:
     metadata:
       labels:
         app: pgadmin
-spec:
+    spec:
       containers:
         - name: pgadmin
           image: dpage/pgadmin4
