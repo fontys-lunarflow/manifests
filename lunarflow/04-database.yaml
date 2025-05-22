@@ -3,6 +3,7 @@ kind: Secret
 type: Opaque
 metadata:
   name: postgres-secret
+  namespace: lunarflow
 data:
   PGADMIN_EMAIL: YWRtaW5AbG9jYWxob3N0LmxvY2Fs
   POSTGRES_PASSWORD: RW1tZW5lei5tb2k=
@@ -12,6 +13,7 @@ apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
   name: postgres-pvc
+  namespace: lunarflow
 spec:
   accessModes:
     - ReadWriteOnce
@@ -23,6 +25,7 @@ apiVersion: apps/v1
 kind: StatefulSet
 metadata:
   name: postgres
+  namespace: lunarflow
 spec:
   replicas: 1
   selector:
@@ -61,6 +64,7 @@ apiVersion: v1
 kind: Service
 metadata:
   name: postgres
+  namespace: lunarflow
 spec:
   selector:
     app: postgres
@@ -73,6 +77,7 @@ apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
   name: pgadmin-pvc
+  namespace: lunarflow
 spec:
   accessModes:
     - ReadWriteOnce
@@ -84,6 +89,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: pgadmin
+  namespace: lunarflow
 spec:
   replicas: 1
   selector:
@@ -124,6 +130,7 @@ apiVersion: v1
 kind: Service
 metadata:
   name: pgadmin
+  namespace: lunarflow
 spec:
   selector:
     app: pgadmin

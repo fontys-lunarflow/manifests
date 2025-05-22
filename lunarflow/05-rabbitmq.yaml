@@ -24,12 +24,12 @@ spec:
             - name: RABBITMQ_DEFAULT_USER
               valueFrom:
                 secretKeyRef:
-                  name: rabbitmq-secret
+                  name: rabbitmq-secrets
                   key: admin-username
             - name: RABBITMQ_DEFAULT_PASS
               valueFrom:
                 secretKeyRef:
-                  name: rabbitmq-secret
+                  name: rabbitmq-secrets
                   key: admin-password   
           image: rabbitmq:management-alpine
           imagePullPolicy: Always

@@ -1,0 +1,14 @@
+# Lunarflow Database Config
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: database-config
+  namespace: lunarflow
+data:
+  # PostgreSQL settings
+  postgres-version: "15"
+  postgres-storage-size: "8Gi"
+
+  # pgAdmin settings
+  pgadmin-storage-size: "1Gi"
+  pgadmin-allowed-domains: "['local', 'localhost']"
