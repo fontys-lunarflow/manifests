@@ -70,6 +70,8 @@ spec:
       labels:
         app: pgadmin
     spec:
+      securityContext:
+        fsGroup: 5050
       containers:
         - name: pgadmin
           image: dpage/pgadmin4
@@ -91,7 +93,6 @@ spec:
           volumeMounts:
             - mountPath: /var/lib/pgadmin
               name: pgadmin-storage
-              subPath: pgadmin-data
       volumes:
         - name: pgadmin-storage
           persistentVolumeClaim:
