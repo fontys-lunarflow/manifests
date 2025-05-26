@@ -1,0 +1,51 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: ticket-api
+  namespace: lunarflow
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: ticket-api
+  template:
+    metadata:
+      labels:
+        app: ticket-api
+    spec:
+      containers:
+        - env:
+            - name: GITLAB_PROJECT
+              valueFrom:
+                configMapKeyRef:
+                  key: TICKETAPI_GITLAB_PROJECT
+                  name: lunarflow-config
+            - name: GITLAB_SERVER
+              valueFrom:
+                configMapKeyRef:
+                  key: TICKETAPI_GITLAB_SERVER
+                  name: lunarflow-config
+            - name: GITLAB_TOKEN
+              valueFrom:
+                secretKeyRef:
+                  key: TICKETAPI_GITLAB_TOKEN
+                  name: lunarflow-secrets
+          image: ghcr.io/fontys-lunarflow/ticket_api:v0.6
+          imagePullPolicy: Always
+          name: ticket-api
+      restartPolicy: Always
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: ticket-api
+  namespace: lunarflow
+spec:
+  ports:
+    - name: http
+      port: 8080
+      protocol: TCP
+      targetPort: 8080
+  selector:
+    app: ticket-api
+  type: ClusterIP
