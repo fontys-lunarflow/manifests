@@ -30,7 +30,7 @@ spec:
                 secretKeyRef:
                   key: TICKETAPI_GITLAB_TOKEN
                   name: lunarflow-secrets
-          image: ghcr.io/fontys-lunarflow/ticket_api:v0.6
+          image: ghcr.io/fontys-lunarflow/ticket_api:latest
           imagePullPolicy: Always
           name: ticket-api
       restartPolicy: Always
