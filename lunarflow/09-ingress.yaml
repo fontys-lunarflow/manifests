@@ -17,6 +17,7 @@ spec:
               number: 15672
         path: /
         pathType: Prefix
+---
 # PGAdmin Ingress
 apiVersion: networking.k8s.io/v1
 kind: Ingress
@@ -36,6 +37,7 @@ spec:
               number: 80
         path: /
         pathType: Prefix
+---
 # Traefik Dashboard Ingress
 apiVersion: networking.k8s.io/v1
 kind: Ingress
@@ -55,3 +57,44 @@ spec:
               number: 8080
         path: /
         pathType: Prefix
+---
+# Content API Ingress
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: content-api-ingress
+  namespace: lunarflow
+spec:
+  ingressClassName: traefik
+  rules:
+  - host: content-api.luxdomain.lan
+    http:
+      paths:
+      - backend:
+          service:
+            name: content-api
+            port:
+              number: 80
+        path: /
+        pathType: Prefix
+---
+# Ticket API Ingress
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: ticket-api-ingress
+  namespace: lunarflow
+spec:
+  ingressClassName: traefik
+  rules:
+  - host: ticket-api.luxdomain.lan
+    http:
+      paths:
+      - backend:
+          service:
+            name: ticket-api
+            port:
+              number: 80
+        path: /
+        pathType: Prefix
+--- 
