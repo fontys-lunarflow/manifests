@@ -12,3 +12,47 @@ data:
   # pgAdmin settings
   pgadmin-storage-size: "1Gi"
   pgadmin-allowed-domains: "['local', 'localhost']"
+---
+  # RabbitMQ Admin Credentials
+apiVersion: v1
+kind: Secret
+metadata:
+  name: rabbitmq-secrets
+  namespace: lunarflow
+type: Opaque
+stringData:
+  admin-username: admin
+  admin-password: supersecretpassword
+---
+# Database (Postgres) and PGAdmin Credentials
+apiVersion: v1
+kind: Secret
+type: Opaque
+metadata:
+  name: postgres-secret
+  namespace: lunarflow
+stringData:
+  POSTGRES_USER: admin
+  POSTGRES_PASSWORD: your-postgres-password
+  PGADMIN_EMAIL: admin@localhost.local
+  PGADMIN_PASSWORD: your-pgadmin-password
+---
+# Lunarflow Configurations
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: lunarflow-config
+  namespace: lunarflow
+data:
+  TICKETAPI_GITLAB_PROJECT: org/team/project
+  TICKETAPI_GITLAB_SERVER: https://gitlab.com/
+---
+# Lunarflow Secrets
+apiVersion: v1
+kind: Secret
+metadata:
+  name: lunarflow-secrets
+  namespace: lunarflow
+type: Opaque
+stringData:
+  TICKETAPI_GITLAB_TOKEN: gl-0000
