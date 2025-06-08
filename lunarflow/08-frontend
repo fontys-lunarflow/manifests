@@ -1,0 +1,77 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: frontend
+  namespace: lunarflow
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: frontend
+  template:
+    metadata:
+      labels:
+        app: frontend
+    spec:
+      containers:
+        - env:
+            - name: GITLAB_PROJECT
+              valueFrom:
+                configMapKeyRef:
+                  key: TICKETAPI_GITLAB_PROJECT
+                  name: lunarflow-config
+            - name: GITLAB_SERVER
+              valueFrom:
+                configMapKeyRef:
+                  key: TICKETAPI_GITLAB_SERVER
+                  name: lunarflow-config
+            - name: GITLAB_TOKEN
+              valueFrom:
+                secretKeyRef:
+                  key: TICKETAPI_GITLAB_TOKEN
+                  name: lunarflow-secrets
+            - name: HOSTNAME
+              valueFrom:
+                configMapKeyRef:
+                  key: FRONTEND_HOSTNAME
+                  name: lunarflow-config
+            - name: NEXT_PUBLIC_API_URL
+              valueFrom:
+                configMapKeyRef:
+                  key: FRONTEND_API_URL
+                  name: lunarflow-config
+            - name: NEXT_PUBLIC_CONTENT_API_URL
+              valueFrom:
+                configMapKeyRef:
+                  key: FRONTEND_CONTENT_API_URL
+                  name: lunarflow-config
+            - name: NODE_ENV
+              valueFrom:
+                configMapKeyRef:
+                  key: FRONTEND_NODE_ENV
+                  name: lunarflow-config
+          image: ghcr.io/fontys-lunarflow/frontend:main
+          imagePullPolicy: Always
+          name: frontend
+          command: ["/bin/sh", "-c"]
+          args:
+            - "npm install object-assign scheduler && npm run dev"
+          ports:
+            - containerPort: 3000
+              name: http
+      restartPolicy: Always
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: frontend
+  namespace: lunarflow
+spec:
+  ports:
+    - name: http
+      port: 80
+      protocol: TCP
+      targetPort: 3000
+  selector:
+    app: frontend
+  type: ClusterIP
