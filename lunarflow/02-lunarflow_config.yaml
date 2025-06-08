@@ -44,8 +44,12 @@ metadata:
   name: lunarflow-config
   namespace: lunarflow
 data:
-  TICKETAPI_GITLAB_PROJECT: org/team/project
+  TICKETAPI_GITLAB_PROJECT: thijs.haker/lunarflow
   TICKETAPI_GITLAB_SERVER: https://gitlab.com/
+  FRONTEND_HOSTNAME: "0.0.0.0"
+  FRONTEND_NODE_ENV: "development"
+  FRONTEND_API_URL: "http://ticket-api.luxdomain.lan"
+  FRONTEND_CONTENT_API_URL: "http://content-api.luxdomain.lan"
 ---
 # Lunarflow Secrets
 apiVersion: v1
@@ -55,4 +59,4 @@ metadata:
   namespace: lunarflow
 type: Opaque
 stringData:
-  TICKETAPI_GITLAB_TOKEN: gl-0000
+  TICKETAPI_GITLAB_TOKEN: glpat-0000
