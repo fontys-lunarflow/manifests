@@ -98,3 +98,22 @@ spec:
         path: /
         pathType: Prefix
 --- 
+# Frontend Ingress
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: frontend-ingress
+  namespace: lunarflow
+spec:
+  ingressClassName: traefik
+  rules:
+  - host: frontend.luxdomain.lan
+    http:
+      paths:
+      - backend:
+          service:
+            name: frontend
+            port:
+              number: 80
+        path: /
+        pathType: Prefix
