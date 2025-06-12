@@ -53,9 +53,6 @@ spec:
           image: ghcr.io/fontys-lunarflow/frontend:main
           imagePullPolicy: Always
           name: frontend
-          command: ["/bin/sh", "-c"]
-          args:
-            - "npm install object-assign scheduler && npm run dev"
           ports:
             - containerPort: 3000
               name: http
