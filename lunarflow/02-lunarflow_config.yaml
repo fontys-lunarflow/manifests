@@ -46,10 +46,11 @@ metadata:
 data:
   TICKETAPI_GITLAB_PROJECT: thijs.haker/lunarflow
   TICKETAPI_GITLAB_SERVER: https://gitlab.com/
-  FRONTEND_HOSTNAME: "0.0.0.0"
+  FRONTEND_HOSTNAME: "http://frontend.luxdomain.lan"
   FRONTEND_NODE_ENV: "development"
   FRONTEND_API_URL: "http://ticket-api.luxdomain.lan"
   FRONTEND_CONTENT_API_URL: "http://content-api.luxdomain.lan"
+  NEXTJS_URL: "https://lunarflow.luxdomain.work"
 ---
 # Lunarflow Secrets
 apiVersion: v1

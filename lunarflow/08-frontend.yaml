@@ -35,6 +35,11 @@ spec:
                 configMapKeyRef:
                   key: FRONTEND_NODE_ENV
                   name: lunarflow-config
+            - name: NEXTJS_URL
+              valueFrom:
+                configMapKeyRef:
+                  key: NEXTJS_URL
+                  name: lunarflow-config
           image: ghcr.io/fontys-lunarflow/frontend:main
           imagePullPolicy: Always
           name: frontend
