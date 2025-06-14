@@ -58,6 +58,14 @@ spec:
                 secretKeyRef:
                   name: keycloak-db-secret
                   key: db-password
+            - name: KC_HOSTNAME
+              value: "https://keycloak.luxdomain.work"
+            - name: KC_HOSTNAME_ADMIN
+              value: "https://keycloak.luxdomain.work"
+            - name: KC_HOSTNAME_STRICT
+              value: "false"
+            - name: KC_PROXY_HEADERS
+              value: "xforwarded"  
           ports:
             - containerPort: 8080
           volumeMounts:
