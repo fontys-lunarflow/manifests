@@ -117,3 +117,13 @@ spec:
               number: 80
         path: /
         pathType: Prefix
+  - host: lunarflow.luxdomain.work
+    http:
+      paths:
+      - backend:
+          service:
+            name: frontend
+            port:
+              number: 80
+        path: /
+        pathType: Prefix
