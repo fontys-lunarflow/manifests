@@ -15,21 +15,6 @@ spec:
     spec:
       containers:
         - env:
-            - name: GITLAB_PROJECT
-              valueFrom:
-                configMapKeyRef:
-                  key: TICKETAPI_GITLAB_PROJECT
-                  name: lunarflow-config
-            - name: GITLAB_SERVER
-              valueFrom:
-                configMapKeyRef:
-                  key: TICKETAPI_GITLAB_SERVER
-                  name: lunarflow-config
-            - name: GITLAB_TOKEN
-              valueFrom:
-                secretKeyRef:
-                  key: TICKETAPI_GITLAB_TOKEN
-                  name: lunarflow-secrets
             - name: HOSTNAME
               valueFrom:
                 configMapKeyRef:
