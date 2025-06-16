@@ -8,7 +8,6 @@ data:
   # PostgreSQL settings
   postgres-version: "15"
   postgres-storage-size: "8Gi"
-
   # pgAdmin settings
   pgadmin-storage-size: "1Gi"
   pgadmin-allowed-domains: "['local', 'localhost']"
@@ -44,13 +43,19 @@ metadata:
   name: lunarflow-config
   namespace: lunarflow
 data:
-  TICKETAPI_GITLAB_PROJECT: thijs.haker/lunarflow
+  #Ticket API Configurations
   TICKETAPI_GITLAB_SERVER: https://gitlab.com/
+  TICKETAPI_GITLAB_PROJECT: thijs.haker/lunarflow
+  # Frontend Configurations
   FRONTEND_HOSTNAME: "http://frontend.luxdomain.lan"
   FRONTEND_NODE_ENV: "development"
   FRONTEND_API_URL: "http://ticket-api.luxdomain.lan"
   FRONTEND_CONTENT_API_URL: "http://content-api.luxdomain.lan"
   NEXTJS_URL: "https://lunarflow.luxdomain.work"
+  # Keycloak Configurations
+  QUARKUS_OIDC_AUTH_SERVER_URL: "https://keycloak.luxdomain.work/realms/eclipse"
+  QUARKUS_OIDC_CLIENT_ID: lunarflow
+  QUARKUS_OIDC_CREDENTIALS_SECRET: your-keycloak-client-secret
 ---
 # Lunarflow Secrets
 apiVersion: v1
@@ -60,4 +65,7 @@ metadata:
   namespace: lunarflow
 type: Opaque
 stringData:
+  # GitLab Token for Ticket API
   TICKETAPI_GITLAB_TOKEN: glpat-0000
+  # Keycloak Client Secret
+  KEYCLOAK_CLIENT_SECRET: your-keycloak-client-secret
