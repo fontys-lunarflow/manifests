@@ -1,0 +1,54 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: user-api
+  namespace: lunarflow
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: user-api
+  template:
+    metadata:
+      labels:
+        app: user-api
+    spec:
+      containers:
+        - env:
+            - name: QUARKUS_OIDC_AUTH_SERVER_URL
+              valueFrom:
+                configMapKeyRef:
+                  key: QUARKUS_OIDC_AUTH_SERVER_URL
+                  name: lunarflow-config
+            - name: QUARKUS_OIDC_CLIENT_ID
+              valueFrom:
+                configMapKeyRef:
+                  key: QUARKUS_OIDC_CLIENT_ID
+                  name: lunarflow-config
+            - name: QUARKUS_OIDC_CREDENTIALS_SECRET
+              valueFrom:
+                secretKeyRef:
+                  key: QUARKUS_OIDC_CREDENTIALS_SECRET
+                  name: lunarflow-secrets
+          image: ghcr.io/fontys-lunarflow/keycloak_integration:main
+          imagePullPolicy: Always
+          name: user-api
+          ports:
+            - containerPort: 8080
+              protocol: TCP
+      restartPolicy: Always
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: user-api
+  namespace: lunarflow
+spec:
+  ports:
+    - name: http
+      port: 8080
+      protocol: TCP
+      targetPort: 8080
+  selector:
+    app: user-api
+  type: ClusterIP
