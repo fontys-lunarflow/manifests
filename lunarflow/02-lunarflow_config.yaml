@@ -1,17 +1,3 @@
-# Lunarflow Database Config
-apiVersion: v1
-kind: ConfigMap
-metadata:
-  name: database-config
-  namespace: lunarflow
-data:
-  # PostgreSQL settings
-  postgres-version: "15"
-  postgres-storage-size: "8Gi"
-  # pgAdmin settings
-  pgadmin-storage-size: "1Gi"
-  pgadmin-allowed-domains: "['local', 'localhost']"
----
   # RabbitMQ Admin Credentials
 apiVersion: v1
 kind: Secret
@@ -55,7 +41,6 @@ data:
   # Keycloak Configurations
   QUARKUS_OIDC_AUTH_SERVER_URL: "https://keycloak.luxdomain.work/realms/eclipse"
   QUARKUS_OIDC_CLIENT_ID: lunarflow
-  QUARKUS_OIDC_CREDENTIALS_SECRET: your-keycloak-client-secret
 ---
 # Lunarflow Secrets
 apiVersion: v1
@@ -68,4 +53,4 @@ stringData:
   # GitLab Token for Ticket API
   TICKETAPI_GITLAB_TOKEN: glpat-0000
   # Keycloak Client Secret
-  KEYCLOAK_CLIENT_SECRET: your-keycloak-client-secret
+  QUARKUS_OIDC_CREDENTIALS_SECRET: your-keycloak-client-secret
