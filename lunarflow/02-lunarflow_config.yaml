@@ -6,6 +6,7 @@ metadata:
   namespace: lunarflow
 type: Opaque
 stringData:
+  # RabbitMQ Credentials
   admin-username: admin
   admin-password: supersecretpassword
 ---
@@ -17,33 +18,29 @@ metadata:
   name: postgres-secret
   namespace: lunarflow
 stringData:
+  # Postgres Credentials
   POSTGRES_USER: admin
   POSTGRES_PASSWORD: your-postgres-password
+  # PGAdmin Credentials
   PGADMIN_EMAIL: admin@localhost.local
   PGADMIN_PASSWORD: your-pgadmin-password
 ---
-# Lunarflow Configurations
+# Lunarflow Configuration
 apiVersion: v1
 kind: ConfigMap
 metadata:
   name: lunarflow-config
   namespace: lunarflow
 data:
-  #Ticket API Configurations
+  #Ticket API Configuration
   TICKETAPI_GITLAB_SERVER: https://gitlab.com/
   TICKETAPI_GITLAB_PROJECT: thijs.haker/lunarflow
-  # Frontend Configurations
-  FRONTEND_HOSTNAME: "http://frontend.luxdomain.lan"
-  FRONTEND_NODE_ENV: "development"
-  FRONTEND_API_URL: "http://ticket-api.luxdomain.lan"
-  FRONTEND_CONTENT_API_URL: "http://content-api.luxdomain.lan"
-  NEXTJS_URL: "https://lunarflow.luxdomain.work"
-  # Keycloak Configurations
+  # Keycloak Configuration
   QUARKUS_OIDC_AUTH_SERVER_URL: "https://keycloak.luxdomain.work/realms/eclipse"
   QUARKUS_OIDC_CLIENT_ID: lunarflow
 ---
 # Lunarflow Secrets
-apiVersion: v1
+apiVersion: v1          
 kind: Secret
 metadata:
   name: lunarflow-secrets

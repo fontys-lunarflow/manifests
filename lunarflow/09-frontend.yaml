@@ -14,33 +14,7 @@ spec:
         app: frontend
     spec:
       containers:
-        - env:
-            - name: HOSTNAME
-              valueFrom:
-                configMapKeyRef:
-                  key: FRONTEND_HOSTNAME
-                  name: lunarflow-config
-            - name: NEXT_PUBLIC_API_URL
-              valueFrom:
-                configMapKeyRef:
-                  key: FRONTEND_API_URL
-                  name: lunarflow-config
-            - name: NEXT_PUBLIC_CONTENT_API_URL
-              valueFrom:
-                configMapKeyRef:
-                  key: FRONTEND_CONTENT_API_URL
-                  name: lunarflow-config
-            - name: NODE_ENV
-              valueFrom:
-                configMapKeyRef:
-                  key: FRONTEND_NODE_ENV
-                  name: lunarflow-config
-            - name: NEXTJS_URL
-              valueFrom:
-                configMapKeyRef:
-                  key: NEXTJS_URL
-                  name: lunarflow-config
-          image: ghcr.io/fontys-lunarflow/frontend:main
+        - image: ghcr.io/fontys-lunarflow/frontend:main
           imagePullPolicy: Always
           name: frontend
           ports:
